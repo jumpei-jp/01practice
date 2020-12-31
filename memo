@@ -1,0 +1,15 @@
+* php endifの使い方
+* special charsの利用方法
+* session cookie postsの３者の違い
+
+index.phpのここの意味がわからない　(rewriteの際のやつ)
+    if ($_REQUEST['action'] == 'rewrite' && isset($_SESSION['join'])) {
+	// session['join']の中に入れていたpostの情報をrewriteの際にはpostの中にsessionの情報を入れる
+	$_POST = $_SESSION['join'];
+    }
+
+ファイルのアップロードが必要
+<form action="" method="post" enctype="multipart/form-data">
+
+* fetch関数がどうなっている？
+* passwordなど、個人情報はsessionに入れない
