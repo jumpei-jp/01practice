@@ -2,7 +2,15 @@
 session_start();
 require('dbconnect.php');
 
+// cookieがあればそれをemailに代入する様にする
+if ($_COOKIE['email'] !== '') {
+  $email = $_COOKIE['email'];
+}
+
 if (!empty($_POST)) {
+  // cookie関係なしで入力する際には12行目の動き
+  $email = $_POST['email'];
+
   // passwordとemailが空であることを確認
   if ($_POST['email'] !== '' && $_POST['password'] !== '') {
     // dbに確認してみる
@@ -17,6 +25,11 @@ if (!empty($_POST)) {
     if($member) {
       $_SESSION['id'] = $member['id'];
       $_SESSION['time'] = time();
+
+      if ($_POST['save'] === 'on') {
+        // 14日間クッキーを保存する
+        setcookie('email', $_POST['email'], time()+60*60*24*14);
+      }
 
       header('Location: index.php');
       exit();
@@ -52,7 +65,7 @@ if (!empty($_POST)) {
       <dl>
         <dt>メールアドレス</dt>
         <dd>
-          <input type="text" name="email" size="35" maxlength="255" value="<?php print (htmlspecialchars($_POST['email'], ENT_QUOTES)); ?>" />
+          <input type="text" name="email" size="35" maxlength="255" value="<?php print (htmlspecialchars($email, ENT_QUOTES)); ?>" />
           <?php if ($error['login'] === 'blank'): ?>
             <p class='error'>* メールアドレスとパスワードをご入力ください</p>
           <?php endif; ?>
