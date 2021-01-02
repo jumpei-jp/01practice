@@ -13,3 +13,7 @@ index.phpのここの意味がわからない　(rewriteの際のやつ)
 
 * fetch関数がどうなっている？
 * passwordなど、個人情報はsessionに入れない
+* log out ページの作成が必要　簡易で作成使用か
+* db周りが全くわからない　dbに接続とかその辺理解したら結構いけそうちゃうかと思った
+* inputのhiddenとは
+* page遷移のプログラム復習
